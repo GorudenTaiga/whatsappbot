@@ -90,6 +90,7 @@ client.on('message', async message => {
                         const imageUrl = randomImage.url;
     
                         const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
+                        fs.writeFileSync(imagePath, Buffer.from(media.data, 'base64'));
                         await downloadImage(imageUrl, imagePath);
     
                         await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : ${args.mode}\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
@@ -161,12 +162,13 @@ async function downloadImage(url, path) {
             responseType: 'stream'
         });
 
-        await new Promise((resolve, reject) => {
+        /* await new Promise((resolve, reject) => {
             const writer = fs.createWriteStream(path);
             response.data.pipe(writer);
             writer.on('finish', resolve);
             writer.on('error', reject);
-        });
+        }); */
+        fs.writeFileSync(path, Buffer.from(response.data, 'base64'));
 
         console.log('Gambar berhasil diunduh');
     } catch (e) {
