@@ -21,6 +21,7 @@ client.on('group_join', (message) => {
     
 });
 
+
 client.on('message', async message => {
     try {
         const prefix = "bot!";
@@ -83,24 +84,34 @@ client.on('message', async message => {
             } else if (command.toLowerCase() == "pixiv") {
                 console.log(`Parameter Title yang diterima : ${args.title}\nParameter Mode yang diterima : ${args.mode}`);
                 try {
-                    const image = await searchImage(args.title, args.mode, msg);
-    
-                    if (image && image.length > 0) {
-                        const randomImage = image[Math.floor(Math.random() * image.length)];
-                        const imageUrl = randomImage.url;
-    
-                        const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
-                        fs.writeFileSync(imagePath, Buffer.from(media.data, 'base64'));
-                        await downloadImage(imageUrl, imagePath);
-    
-                        await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : ${args.mode}\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
-                            media: fs.createReadStream(imagePath)
-                        })
-    
-                        fs.unlinkSync(imagePath);
-                    } else {
-                        console.log("Image: ", image);
-                        msg.reply("gambar tidak ditemukan");
+                    msg.reply("Gambar sedang di download")
+                    for (let i = 1;i <= parseInt(args.count);i++) {
+                        const image = await searchImage(args.title, args.mode, msg);
+        
+                        if (image && image.length > 0) {
+                            const randomImage = image[Math.floor(Math.random() * image.length)];
+        
+                            const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
+                            const originalUrl = await getImageLink(randomImage.id);
+                            console.log("Url : ", originalUrl)
+                            await downloadImage(originalUrl, imagePath, randomImage.id, msg);
+                            try {
+                                console.log("tanpa await");
+                                msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : ${args.mode}\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
+                                    media: MessageMedia.fromFilePath(imagePath)
+                                })    
+                            } catch (e) {
+                                console.log("dengan await")
+                                await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : ${args.mode}\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
+                                    media: MessageMedia.fromFilePath(imagePath)
+                                })    
+                            } finally {
+                                fs.unlinkSync(imagePath);
+                            }
+                        } else {
+                            console.log("Image: ", image);
+                            msg.reply("gambar tidak ditemukan");
+                        }
                     }
                 } catch (e) {
                     console.log("Error : ", e);
@@ -116,18 +127,21 @@ client.on('message', async message => {
 });
 
 function parseArguments(input) {
-    const args = input.match(/-\w+=\S+/g);
-    const parameter = {};
-    
-    if (args) {
-        args.forEach(arg => {
-            const [key, value] = arg.split('=');
-            if (key && value) {
-                parameter[key.replace('-', '').toLowerCase()] = value;
-            }
-        })
+    const args = {}
+    args.count = 1;
+    args.mode = "safe";
+    args.title = "";
+    const regex = /-([a-zA-Z]+)\s+"([^"]+)"|-([a-zA-Z]+)\s+(\S+)/g;
+    let match;
+
+    while ((match = regex.exec(input)) !== null) {
+        if (match[1]) {
+            args[match[1]] = match[2];
+        } else if (match[3]) {
+            args[match[3]] = match[4];
+        }
     }
-    return parameter;
+    return args;
 }
 
 async function searchImage(title, mode, msg) {
@@ -154,22 +168,42 @@ async function searchImage(title, mode, msg) {
     }
 }
 
-async function downloadImage(url, path) {
+async function getImageLink(id) {
+    const response = await axios({
+        url: `https://www.pixiv.net/ajax/illust/${id}`,
+        method: 'get',
+        headers: {
+            'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)',
+            'Referer' : `https://www.pixiv.net/artworks/${id}`,
+            'Accept-Encoding' : 'gzip,deflate,br,zstd',
+            'Cookie' : 'PHPSESSID=87338801_xFyT5tXuCjiVn8ZMc45ExWNQbvpuxLRU'
+        }
+    });
+    const data = response.data;
+    const originalurl = data.body.urls.original;
+    return originalurl;
+}
+
+async function downloadImage(url, path, id, msg) {
     try {
         const response = await axios({
-            url: url,
+            url: url.replace('\\', ''),
             method: 'get',
-            responseType: 'stream'
+            responseType: 'stream',
+            headers: {
+                'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)',
+                'Referer' : `https://www.pixiv.net/member_illust.php?mode=medium&illust_id=${id}`,
+                'Accept-Encoding' : 'gzip,deflate,br,zstd',
+                'Cookie' : 'PHPSESSID=87338801_xFyT5tXuCjiVn8ZMc45ExWNQbvpuxLRU'
+            }
         });
-
-        /* await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             const writer = fs.createWriteStream(path);
             response.data.pipe(writer);
             writer.on('finish', resolve);
             writer.on('error', reject);
-        }); */
-        fs.writeFileSync(path, Buffer.from(response.data, 'base64'));
-
+        });
+        // fs.writeFileSync(path, Buffer.from(response.data, 'base64'));
         console.log('Gambar berhasil diunduh');
     } catch (e) {
         console.log('Gambar gagal diunduh : ', e);
