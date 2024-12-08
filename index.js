@@ -8,20 +8,26 @@ const sharp = require('sharp');
 
 
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: { 
+    restartOnAuthFail: true,
+    webVersionCache: {
+        type: "remote",
+        remotePath:
+          "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html",
+      },
+      puppeteer: {
         headless: true,
-        executablePath: puppeteer.executablePath(),
         args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
-            '--no-zygote',
-            '--disable-gpu',
-            '--single-process' // Untuk beberapa server/container
-        ]
-    }
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-dev-shm-usage",
+          "--disable-accelerated-2d-canvas",
+          "--no-first-run",
+          "--no-zygote",
+          "--single-process", 
+          "--disable-gpu",
+        ],
+      },
+      authStrategy: new LocalAuth(),
 });
 
 client.on('qr', qr => {
