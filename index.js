@@ -5,32 +5,99 @@ const axios = require('axios');
 const fs = require('fs');
 const sharp = require('sharp');
 
+
 const client = new Client({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth(),
+    puppeteer: { headless: true }
 });
 
 client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
 });
 
+client.on('disconnected', (reason) => {
+    console.log("Bot Disconnected : ", reason)
+    client.initialize()
+})
+
 client.on('ready', () => {
     console.log('Bot is ready');
 });
 
-client.on('group_join', (message) => {
-    
+client.on('group_leave', async (notif) => {
+    try {
+        const msg = await notif.getChat();
+        const userId = notif.id.participant;
+        const contact = userId.split('@')[0];
+        let data = readJsonData('./jsonData/outro.json');
+        data = Object.values(data).find((item) => item.groupId === msg.name);
+        console.log(data);
+        console.log(String("Outro : " + data.outro))
+        if (data) {
+            if (data.outro.includes("<username>")) {
+                data.outro = data.outro.replaceAll("<username>", `@${contact}`)
+            }
+            msg.sendMessage(data.outro, {mentions: [userId]})
+        }
+    } catch (e) {
+        console.log("Group Leave error : ", e)
+    }
+})
+
+client.on('group_join', async (notif) => {
+    try {
+        const msg = await notif.getChat()
+        const userId= notif.id.participant
+        const contact = userId.split('@')[0]
+        let data = readJsonData('./jsonData/intro.json')
+        data = Object.values(data).find((item) => item.groupId === msg.name)
+        console.log(data)
+        if (data) {
+            if (data.intro.includes("<username>")) {
+                data.intro = data.intro.replaceAll("<username>", `@${contact}`)
+            }
+            msg.sendMessage(data.intro, {mentions: [userId]})
+        }
+    } catch (e) {
+        console.log("Error : ", e)
+    }
 });
 
+const activeQuiz = {}
+
+const commandsHelp = {
+    'ping': 'bot!ping : Mengetes apakah bot sudah aktif atau belum\nContoh pemakaian : bot!ping\n\n',
+    'setintro': 'bot!setintro -intro <text> : Membuat sebuah pesan intro saat terdapat member baru di grup\nParameter yang dapat di isi :\n-intro : digunakan untuk menambahkan pesan intro (Jangan lupa gunakan tanda " " untuk pembuka dan penutup intro)\n-update : digunakan untuk mengupdate pesan intro yang sudah ada\nGunakan <username> untuk menambahkan mention ke orang yang baru join\n\nContoh penggunaan : bot!setintro -intro "Hello <username>, Perkenalan dulu yuk\nNama : \nGender : \nUmur : \nWaifu : \n\nSalam Kenal 😊" -update',
+    'setoutro': 'bot!setoutro -outro <text> : Membuat sebuah pesan outro saat terdapat member keluar dari grup\nParameter yang dapat di isi :\n-outro : digunakan untuk menambahkan pesan outro (Jangan lupa gunakan tanda " " untuk pembuka dan penutup outro)\n-update : digunakan untuk mengupdate pesan outroyang sudah ada\nGunakan <username> untuk menambahkan mention ke orang yang baru leave\n\nContoh penggunaan : bot!setoutro -outro "Selamat tinggal <username>, semoga kamu lebih bahagia diluar sana" -update',
+    'sticker': 'bot!sticker -text <text> : Konversi gambar dengan nama sesuai keinginan user\nbot!sticker : Konversi gambar menjadi sebuah sticker\nParameter yang bisa digunakan :\n-text : digunakan untuk mengisi text yang ingin digunakan sebagai nama dari stickermu\nCara pemakaian :\n1. Pilih gambar yang ingin dijadikan sticker (Diusahakan 1:1)\n2.Ketikkan command bot!sticker\n(Opsional) Jika ingin menamai sticker tersebut, maka berikan spasi setelah bot!sticker dan ketikkan nama stickermu\nContoh tanpa parameter : bot!sticker\nContoh dengan parameter : bot!sticker Ini adalah tes',
+    'pixiv': 'bot!pixiv -title <title> -count <count> : Command ini ditujukan untuk mencarikan gambar sesuai keinginan pengguna\n\nParameter yang dapat di isi :\n-title : digunakan untuk mengisikan tag yang ingin kamu cari (Disarankan menggunakan bahasa jepang)\n-count : digunakan untuk mengisikan jumlah gambar yang kalian inginkan (Sementara maksimal 25)\n\nContoh pemakaian : bot!pixiv -title "丹花イブキ ロリ" -count 1',
+    'help': 'Prefix : bot!\nCommands:\nping    sticker   pixiv\nsetintro    setoutro\n\nbot!help <command> : Melihat bantuan dari command yang ingin kamu gunakan\nbot!help : Melihat bantuan secara umum\nCommand ini digunakan untuk menampilkan tampilan ini'
+}
+
+function saveLeaderboard(data) {
+    fs.writeFileSync(`./jsonData/leaderboard.json`, JSON.stringify(data, null, 2), 'utf-8');
+}
 
 client.on('message', async message => {
     try {
         const prefix = "bot!";
-        const msg = await message;
-
+        const msg = message;
         const chat = await msg.getChat();
+        fs.existsSync(`./jsonData/leaderboard.json`)
+        fs.writeFileSync(`./jsonData/leaderboard.json`, JSON.stringify({}))
+        let leaderboard = JSON.parse(fs.readFileSync(`./jsonData/leaderboard.json`, 'utf-8'))
+        leaderboard["groupId"] = chat.id._serialized;
+        leaderboard = Object.keys(leaderboard).filter((item) => item.groupId == chat.id._serialized) || {}
+
         if (msg.body.startsWith(prefix)) {
             
-            const args = parseArguments(msg.body)
+            const args = parseArguments(msg.body);
+            args.count = args.count || 1;
+            args.mode = args.mode || "safe";
+            args.title = args.title || "";
+            args.text = args.text || "";
+            args.time = 15000;
+
             const command = msg.body.slice(prefix.length).trim().split(/ +/).shift().toLowerCase();
             
             console.log(`Arguments : ${args}`); 
@@ -60,7 +127,7 @@ client.on('message', async message => {
                             console.log('Stiker berhasil dibuat : ', info);
 
                             const stickerMedia = MessageMedia.fromFilePath(outputPath);
-                            if (args.length > 0) {
+                            if (args.text) {
                                 chat.sendMessage(stickerMedia, {sendMediaAsSticker: true, stickerAuthor: `Made with GorudenTaiga's Bot`, stickerCategories: 'Bot', stickerName: args.text, mentions: msg.author})
                             }
                             else {
@@ -74,37 +141,140 @@ client.on('message', async message => {
                 }
             } else if (command == "sticker" && !msg.hasMedia) {
                 await chat.sendStateTyping();
-                msg.reply('Kirimkan gambar dengan prefix ini untuk diproses menjadi sticker', );
+                msg.reply('Kirimkan gambar dengan prefix ini untuk diproses menjadi sticker, ketik `bot!help sticker` untuk lebih lengkapnya', );
             } else if (command == "ping") {
                 await chat.sendStateTyping();
                 msg.reply("Bot telah on");
+            } else if (command == "help") {
+                await chat.sendStateTyping();
+                const help = msg.body.slice(prefix.length + command.length).trim().split(/ +/).shift().toLowerCase()
+                console.log("Help : ", help);
+                if (help == "pixiv") {
+                    msg.reply(commandsHelp.pixiv);
+                } else if (help == "ping") {
+                    msg.reply(commandsHelp.ping);
+                } else if (help == "sticker") {
+                    msg.reply(commandsHelp.sticker);
+                } else if (help == "setoutro") {
+                    msg.reply(commandsHelp.setoutro)
+                } else if (help == "setintro") {
+                    msg.reply(commandsHelp.setintro)
+                } else {
+                    msg.reply(commandsHelp.help)
+                }
             } else if (command == "setintro") {
                 await chat.sendStateTyping();
-                
+                if (msg.from.includes('@g.us')) {
+                    try {
+                        let data = readJsonData('./jsonData/intro.json')
+                        data = data.find((item) => item.groupId === chat.name)
+                        if (data) {
+                            console.log(`JSON Data Intro :\n${data}`)
+                            data.intro = args.intro;
+                            try {
+                                fs.writeFileSync('./jsonData/intro.json', JSON.stringify(data, null, 2), 'utf-8');
+                                msg.reply("Berhasil mengupdate intro")
+                            } catch (e) {
+                                console.log("Error : ", e)
+                                msg.reply("Gagal mengupdate intro")
+                            }
+                        } else {
+                            msg.reply("Data grup tidak ditemukan, segera dibuatkan intro")
+                            const inputData = {
+                                groupId: chat.name,
+                                createdBy: msg.author,
+                                intro: args.intro
+                            }
+                            data.push(inputData);
+                            try {
+                                fs.writeFileSync('./jsonData/intro.json', JSON.stringify(data, null, 2), 'utf-8')
+                                msg.reply("Intro sudah berhasil ditambah")
+                            } catch (e) {
+                                console.log("Error : ", e)
+                                msg.reply("Data gagal disimpan")
+                            }
+                        }
+                    } catch (e) {
+                        console.log("Error : ", e)
+                        msg.reply(e)
+                    }
+                } else {
+                    msg.reply("Anda sedang tidak berada di grup")
+                }
+            } else if (command == "setoutro") {
+                await chat.sendStateTyping();
+                if (msg.from.includes('@g.us')) {
+                    if (args.update) {
+                        try {
+                            let data = readJsonData('./jsonData/outro.json')
+                            data = data.find((item) => item.groupID === chat.name)
+                            if (data) {
+                                console.log(`JSON Data outro :\n${data}`)
+                                data.outro = args.outro;
+                                try {
+                                    fs.writeFileSync('./jsonData/outro.json', JSON.stringify(data, null, 2), 'utf-8');
+                                    msg.reply("Berhasil mengupdate outro")
+                                } catch (e) {
+                                    console.log("Error : ", e)
+                                    msg.reply("Gagal mengupdate outro")
+                                }
+                            } else {
+                                msg.reply("Data grup tidak ditemukan, buat outro baru terlebih dahulu")
+                            }
+                        } catch (e) {
+                            console.log("Error : ", e)
+                            msg.reply(e)
+                        }
+                    } else {
+                        try {
+                            let data = readJsonData('./jsonData/outro.json')
+                            const inputData = {
+                                groupId: chat.name,
+                                createdBy: msg.author,
+                                outro: args.outro
+                            }
+                            if (data) {
+                                data.push(inputData);
+                                try {
+                                    fs.writeFileSync('./jsonData/outro.json', JSON.stringify(data, null, 2), 'utf-8')
+                                    msg.reply("outro sudah berhasil ditambah")
+                                } catch (e) {
+                                    console.log("Error : ", e)
+                                    msg.reply("Data gagal disimpan")
+                                }
+                            }
+                        } catch (e) {
+                            msg.reply("Terjadi kesalahan | @6287743160171");
+                        }
+                    }
+                } else {
+                    msg.reply("Anda sedang tidak berada di grup")
+                }
             } else if (command.toLowerCase() == "pixiv") {
                 console.log(`Parameter Title yang diterima : ${args.title}\nParameter Mode yang diterima : ${args.mode}`);
                 try {
                     msg.reply("Gambar sedang di download")
+                    const image = await searchImage(args.title, 'safe', msg);
                     for (let i = 1;i <= parseInt(args.count);i++) {
-                        const image = await searchImage(args.title, args.mode, msg);
-        
                         if (image && image.length > 0) {
                             const randomImage = image[Math.floor(Math.random() * image.length)];
         
                             const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
                             const originalUrl = await getImageLink(randomImage.id);
                             console.log("Url : ", originalUrl)
+
                             await downloadImage(originalUrl, imagePath, randomImage.id, msg);
+
                             try {
                                 console.log("tanpa await");
-                                msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : ${args.mode}\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
+                                msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : Safe\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
                                     media: MessageMedia.fromFilePath(imagePath)
                                 })    
                             } catch (e) {
                                 console.log("dengan await")
-                                await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : ${args.mode}\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
+                                await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : Safe\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
                                     media: MessageMedia.fromFilePath(imagePath)
-                                })    
+                                })
                             } finally {
                                 fs.unlinkSync(imagePath);
                             }
@@ -115,22 +285,57 @@ client.on('message', async message => {
                     }
                 } catch (e) {
                     console.log("Error : ", e);
-                    msg.reply("Terjadi kesalahan");
+                    try {
+                        msg.reply("Terjadi kesalahan");
+                    } catch (e) {
+                        console.log("Error : ", e)
+                    }
                 }
+            } else if (command == "startquiz") {
+                await chat.sendStateTyping();
+                let quest = JSON.parse(fs.readFileSync('./jsonData/questions.json', 'utf-8'));
+                quest = Object.values(quest).filter((item) => item.difficulty == (args.diff || 'medium'));
+
+                const randomIndex = Math.floor(Math.random() * quest.length);
+                const currentQuest = quest[randomIndex];
+                
+                activeQuiz[chat.id._serialized] = currentQuest;
+                
+                chat.sendMessage(`Quiz dimulai!\nQuiz : ${currentQuest.question}`);
+                console.log(activeQuiz)
+            } else if (command == "leaderboard") {
+                let board = 'Leaderboard : \n';
+                leaderboard.forEach(item => {
+                    console.log(item)
+                    // board += `${item.split('@')[0]}: ${leaderboard[item]} point\n`;
+                });
+
+                msg.reply(board)
+            }
+        }
+        if (activeQuiz[chat.id._serialized]) {
+            const currentQuiz = activeQuiz[chat.id._serialized];
+            console.log("Question : ", currentQuiz.question.toLowerCase())
+            console.log("Answer : ", currentQuiz.answer.toLowerCase());
+            console.log("Choose : ", msg.body.toLowerCase())
+            if (msg.body.toLowerCase().includes(currentQuiz.answer.toLowerCase())) {
+                const userId = msg.author || msg.from;
+                leaderboard[userId] = (leaderboard[userId] || 0) + currentQuiz.point;
+                // Object.keys(leaderboard).find((item.groupId == chat.name && item.groupId.userId == userId))
+                saveLeaderboard(leaderboard)
+                
+                
+                msg.reply(`Jawaban Benar! 🎉\nKamu meraih point : ${currentQuiz.point}`);
+                delete activeQuiz[chat.id._serialized]
             } 
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.log(`Error : ${err}`)
-        message.reply("Terjadi error. Segera mensummon owner @6287743160171")
     }
 });
 
 function parseArguments(input) {
     const args = {}
-    args.count = 1;
-    args.mode = "safe";
-    args.title = "";
     const regex = /-([a-zA-Z]+)\s+"([^"]+)"|-([a-zA-Z]+)\s+(\S+)/g;
     let match;
 
@@ -144,6 +349,18 @@ function parseArguments(input) {
     return args;
 }
 
+function readJsonData(path) {
+    let rawData = fs.readFileSync(path, 'utf-8')
+    let data = JSON.parse(rawData);
+    if (!data) {
+        throw new Error("Tidak dapat membaca data");
+    }
+    return data;
+}
+
+
+
+// Start Function Pixiv
 async function searchImage(title, mode, msg) {
     try {
         const response = await axios.get(`https://www.pixiv.net/ajax/search/artworks/${title}?word=${title}&mode=${mode}`, {
@@ -162,9 +379,7 @@ async function searchImage(title, mode, msg) {
         }
         return illustrations;
     } catch (e) {
-        msg.reply("Terjadi kesalahan");
         console.log("Error : ", e);
-        return null;
     }
 }
 
@@ -209,6 +424,12 @@ async function downloadImage(url, path, id, msg) {
         console.log('Gambar gagal diunduh : ', e);
     }
 }
+//End Function Pixiv
+
+
+
+
+
 
 client.initialize();
 

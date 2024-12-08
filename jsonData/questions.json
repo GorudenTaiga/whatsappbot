@@ -1,0 +1,183 @@
+[
+    {
+      "question": "Apa ibu kota negara Indonesia?",
+      "answer": "Jakarta",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Siapakah presiden pertama Indonesia?",
+      "answer": "Soekarno",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Berapa jumlah provinsi di Indonesia saat ini?",
+      "answer": "38",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa lambang negara Indonesia?",
+      "answer": "Garuda Pancasila",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Apa nama lagu kebangsaan Indonesia?",
+      "answer": "Indonesia Raya",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Pulau manakah yang paling besar di Indonesia?",
+      "answer": "Kalimantan",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Pada tahun berapa Indonesia merdeka?",
+      "answer": "1945",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Siapakah wakil presiden pertama Indonesia?",
+      "answer": "Mohammad Hatta",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa semboyan negara Indonesia?",
+      "answer": "Bhinneka Tunggal Ika",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Apa nama pulau di Indonesia yang dikenal sebagai Pulau Dewata?",
+      "answer": "Bali",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Sebutkan nama candi peninggalan Hindu terbesar di Indonesia!",
+      "answer": "Candi Prambanan",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Sebutkan nama candi Buddha terbesar di Indonesia!",
+      "answer": "Candi Borobudur",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa nama suku terbesar di Pulau Jawa?",
+      "answer": "Jawa",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Siapa yang menjabat sebagai presiden Indonesia ke-7?",
+      "answer": "Joko Widodo",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Apa nama pelabuhan terbesar di Indonesia?",
+      "answer": "Pelabuhan Tanjung Priok",
+      "difficulty": "hard",
+      "point": 30
+    },
+    {
+      "question": "Sebutkan nama gunung tertinggi di Indonesia!",
+      "answer": "Puncak Jaya",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa nama peristiwa penting yang terjadi pada 17 Agustus 1945?",
+      "answer": "Proklamasi Kemerdekaan",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Apa nama teks yang dibacakan Soekarno saat Indonesia merdeka?",
+      "answer": "Teks Proklamasi",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Siapakah nama pahlawan perempuan dari Jepara yang memperjuangkan pendidikan untuk perempuan?",
+      "answer": "R.A. Kartini",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa nama kerajaan Hindu tertua di Indonesia?",
+      "answer": "Kerajaan Kutai",
+      "difficulty": "hard",
+      "point": 30
+    },
+    {
+      "question": "Apa nama mata uang resmi Indonesia?",
+      "answer": "Rupiah",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Apa nama danau terbesar di Indonesia?",
+      "answer": "Danau Toba",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Siapakah penulis novel 'Laskar Pelangi'?",
+      "answer": "Andrea Hirata",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Sebutkan jumlah sila dalam Pancasila!",
+      "answer": "Lima",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Sebutkan urutan warna bendera Indonesia dari atas ke bawah!",
+      "answer": "Merah dan Putih",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Sebutkan nama perjanjian yang menjadi dasar kemerdekaan Indonesia diakui oleh Belanda!",
+      "answer": "Konferensi Meja Bundar",
+      "difficulty": "hard",
+      "point": 30
+    },
+    {
+      "question": "Apa nama masakan tradisional Indonesia yang diakui sebagai makanan terenak di dunia?",
+      "answer": "Rendang",
+      "difficulty": "easy",
+      "point": 10
+    },
+    {
+      "question": "Apa nama suku asli yang mendiami Pulau Papua?",
+      "answer": "Suku Asmat",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa nama alat musik tradisional dari Jawa Barat?",
+      "answer": "Angklung",
+      "difficulty": "medium",
+      "point": 20
+    },
+    {
+      "question": "Apa nama perjanjian yang membagi wilayah Nusantara antara Portugis dan Spanyol pada masa penjajahan?",
+      "answer": "Perjanjian Tordesillas",
+      "difficulty": "hard",
+      "point": 30
+    }
+  ]
+  
