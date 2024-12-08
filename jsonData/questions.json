@@ -178,6 +178,743 @@
       "answer": "Perjanjian Tordesillas",
       "difficulty": "hard",
       "point": 30
-    }
-  ]
-  
+    },
+    {
+      "question": "Apa kepanjangan dari HTML dalam dunia teknologi web?",
+      "answer": "HyperText Markup Language",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa penemu teori gravitasi?",
+      "answer": "Sir Isaac Newton",
+      "difficulty": "medium",
+      "point": 10
+    },
+    {
+      "question": "Apa itu pluralisme dalam konteks sosial?",
+      "answer": "Keberagaman dalam masyarakat, baik dari segi budaya, agama, maupun etnis.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Berapa hasil dari 15 + 27?",
+      "answer": "42",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa itu fotosintesis dalam biologi?",
+      "answer": "Proses di mana tumbuhan mengubah energi cahaya menjadi energi kimia dengan bantuan klorofil.",
+      "difficulty": "medium",
+      "point": 10
+    },
+    {
+      "question": "Siapa yang menulis buku 'Das Kapital'?",
+      "answer": "Karl Marx",
+      "difficulty": "hard",
+      "point": 12
+    },
+    {
+      "question": "Apa yang dimaksud dengan revolusi industri?",
+      "answer": "Perubahan besar dalam teknologi, ekonomi, dan masyarakat yang dimulai di Inggris pada abad ke-18.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa arti dari kata 'demokrasi' dalam pemerintahan?",
+      "answer": "Sistem pemerintahan di mana rakyat memiliki kekuasaan untuk memilih pemimpin dan membuat keputusan.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa penemu lampu pijar?",
+      "answer": "Thomas Edison",
+      "difficulty": "easy",
+      "point": 6
+    },
+    {
+      "question": "Berapa hasil dari 9 x 8?",
+      "answer": "72",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa yang dikenal sebagai Bapak Proklamator Indonesia?",
+      "answer": "Soekarno",
+      "difficulty": "medium",
+      "point": 9
+    },
+    {
+      "question": "Apa yang dimaksud dengan sistem ekonomi campuran?",
+      "answer": "Sistem ekonomi yang menggabungkan elemen-elemen ekonomi pasar dan ekonomi komando.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa itu globalisasi?",
+      "answer": "Proses penyebaran informasi, budaya, dan produk secara global melalui kemajuan teknologi.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Siapa penemu telepon?",
+      "answer": "Alexander Graham Bell",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa arti dari simbol 'π' dalam matematika?",
+      "answer": "Pi, konstanta matematika yang menyatakan rasio antara keliling dan diameter lingkaran.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'sistem pemerintahan presidensial'?",
+      "answer": "Sistem pemerintahan di mana presiden bertindak sebagai kepala negara dan kepala pemerintahan.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menjadi presiden pertama Indonesia?",
+      "answer": "Soekarno",
+      "difficulty": "easy",
+      "point": 6
+    },
+    {
+      "question": "Berapa hasil dari 81 ÷ 9?",
+      "answer": "9",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa yang menemukan listrik?",
+      "answer": "Benjamin Franklin",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa ibu kota Prancis?",
+      "answer": "Paris",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa hasil dari 45 + 55?",
+      "answer": "100",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama planet terdekat dengan matahari?",
+      "answer": "Merkurius",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa penulis 'Harry Potter'?",
+      "answer": "J.K. Rowling",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama sistem operasi buatan Microsoft?",
+      "answer": "Windows",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa jumlah anggota PBB?",
+      "answer": "193",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa yang dimaksud dengan genetik?",
+      "answer": "Ilmu yang mempelajari pewarisan sifat pada makhluk hidup.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa itu DNS dalam jaringan komputer?",
+      "answer": "Domain Name System",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang pertama kali mengorbitkan satelit ke luar angkasa?",
+      "answer": "Uni Soviet (Sputnik 1)",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama kota yang terkenal dengan Menara Eiffel?",
+      "answer": "Paris",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa penulis novel '1984'?",
+      "answer": "George Orwell",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa itu teknologi blockchain?",
+      "answer": "Teknologi yang digunakan untuk menyimpan data secara terdesentralisasi.",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama benua terbesar di dunia?",
+      "answer": "Asia",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa yang menciptakan mesin uap?",
+      "answer": "James Watt",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama bunga yang dikenal sebagai bunga nasional Jepang?",
+      "answer": "Sakura",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa yang dimaksud dengan globalisasi?",
+      "answer": "Proses integrasi antara negara-negara di dunia.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama teori yang menyatakan bahwa bumi mengelilingi matahari?",
+      "answer": "Teori Heliocentrik",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Berapa jumlah jam dalam sehari?",
+      "answer": "24",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama perangkat keras yang digunakan untuk mencetak dokumen?",
+      "answer": "Printer",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa itu hukum Newton yang pertama?",
+      "answer": "Hukum inersia: Sebuah benda akan tetap dalam keadaan diam atau bergerak lurus beraturan kecuali ada gaya yang bekerja padanya.",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa yang dimaksud dengan hak asasi manusia?",
+      "answer": "Hak dasar yang dimiliki oleh setiap individu tanpa diskriminasi.",
+      "difficulty": "medium",
+      "point": 9
+    },
+    {
+      "question": "Siapa yang mencetuskan teori heliosentris?",
+      "answer": "Nicolaus Copernicus",
+      "difficulty": "hard",
+      "point": 12
+    },
+    {
+      "question": "Apa yang dimaksud dengan biodiversitas?",
+      "answer": "Keanekaragaman hayati yang ada di bumi, termasuk berbagai jenis tanaman, hewan, dan mikroorganisme.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'sumber daya alam'?",
+      "answer": "Bahan-bahan yang berasal dari alam yang dapat dimanfaatkan untuk memenuhi kebutuhan manusia.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa itu konstitusi?",
+      "answer": "Hukum dasar negara yang mengatur struktur pemerintahan dan hak-hak warga negara.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Siapa yang memimpin pasukan Indonesia dalam Pertempuran Surabaya?",
+      "answer": "Sudirman",
+      "difficulty": "medium",
+      "point": 9
+    },
+    {
+      "question": "Berapa hasil dari 14 x 5?",
+      "answer": "70",
+      "difficulty": "easy",
+      "point": 6
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'proses evolusi'?",
+      "answer": "Perubahan bertahap dalam organisme dari generasi ke generasi yang dapat mempengaruhi spesies.",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Siapa yang dikenal sebagai Bapak Pendidikan Indonesia?",
+      "answer": "Ki Hajar Dewantara",
+      "difficulty": "medium",
+      "point": 9
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'liberalisasi ekonomi'?",
+      "answer": "Proses pembukaan sektor ekonomi terhadap persaingan global dengan mengurangi campur tangan pemerintah.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Siapa yang pertama kali mengemukakan teori relativitas?",
+      "answer": "Albert Einstein",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa yang dimaksud dengan demokrasi Pancasila?",
+      "answer": "Sistem pemerintahan yang berlandaskan pada nilai-nilai Pancasila dengan mengutamakan musyawarah dan mufakat.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Siapa yang pertama kali mengembangkan teori atom?",
+      "answer": "John Dalton",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'teori sel' dalam biologi?",
+      "answer": "Teori yang menyatakan bahwa sel adalah unit struktural dan fungsional dasar dari makhluk hidup.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Siapa penemu komputer pertama?",
+      "answer": "Charles Babbage",
+      "difficulty": "medium",
+      "point": 9
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'kewajiban' dalam kewarganegaraan?",
+      "answer": "Tanggung jawab yang harus dilakukan oleh setiap warga negara untuk kebaikan bersama.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang dikenal sebagai pahlawan nasional dari Bali?",
+      "answer": "I Gusti Ngurah Rai",
+      "difficulty": "medium",
+      "point": 9
+    },
+    {
+      "question": "Apa itu hak pilih dalam sistem demokrasi?",
+      "answer": "Hak setiap warga negara untuk memilih pemimpin dalam pemilihan umum.",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa jumlah negara anggota ASEAN?",
+      "answer": "10",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'pertumbuhan ekonomi'?",
+      "answer": "Proses peningkatan output barang dan jasa dalam suatu negara dari waktu ke waktu.",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'kesetaraan gender'?",
+      "answer": "Prinsip yang mengharuskan adanya persamaan hak antara pria dan wanita.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menemukan penicillin?",
+      "answer": "Alexander Fleming",
+      "difficulty": "medium",
+      "point": 8
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'hak milik' dalam hukum?",
+      "answer": "Hak untuk memiliki dan menguasai barang atau properti secara sah.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'kewarganegaraan'?",
+      "answer": "Status hukum yang menunjukkan hubungan antara individu dan negara.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa itu Pancasila?",
+      "answer": "Lima dasar negara Indonesia yang mencakup Ketuhanan, Kemanusiaan, Persatuan, Kerakyatan, dan Keadilan Sosial.",
+      "difficulty": "easy",
+      "point": 6
+    },
+    {
+      "question": "Apa yang dimaksud dengan 'sistem pemerintahan parlementer'?",
+      "answer": "Sistem pemerintahan di mana pemerintah bertanggung jawab kepada parlemen atau legislatif.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa ibu kota Indonesia?",
+      "answer": "Jakarta",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa banyak sisi pada segitiga?",
+      "answer": "3",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa warna langit saat cerah?",
+      "answer": "Biru",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa penemu telepon?",
+      "answer": "Alexander Graham Bell",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa yang dimaksud dengan internet?",
+      "answer": "Jaringan global yang menghubungkan komputer.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama hewan nasional Indonesia?",
+      "answer": "Harimau Sumatra",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa itu Pancasila?",
+      "answer": "Dasar negara Indonesia.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menemukan teori relativitas?",
+      "answer": "Albert Einstein",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa ibu kota Amerika Serikat?",
+      "answer": "Washington D.C.",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa banyak planet dalam sistem tata surya?",
+      "answer": "8",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama gunung tertinggi di dunia?",
+      "answer": "Everest",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menulis kitab suci Al-Qur'an?",
+      "answer": "Allah",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama negara yang terkenal dengan pizza?",
+      "answer": "Italia",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama ibukota Jepang?",
+      "answer": "Tokyo",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa yang menemukan komputer pertama?",
+      "answer": "Charles Babbage",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama hewan yang bisa terbang?",
+      "answer": "Burung",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa jumlah anggota DPR RI?",
+      "answer": "575",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama sungai terpanjang di dunia?",
+      "answer": "Nile",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang pertama kali menemukan vaksin?",
+      "answer": "Edward Jenner",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama negara yang terkenal dengan cendrawasih?",
+      "answer": "Papua Nugini",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Berapa hasil dari 7 x 6?",
+      "answer": "42",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa yang pertama kali mendarat di bulan?",
+      "answer": "Neil Armstrong",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa itu emosi?",
+      "answer": "Perasaan yang muncul sebagai reaksi terhadap situasi.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama lautan yang paling luas?",
+      "answer": "Samudra Pasifik",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa yang dimaksud dengan ekosistem?",
+      "answer": "Komunitas makhluk hidup dan lingkungannya.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama bulan pertama dalam kalender?",
+      "answer": "Januari",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa yang menemukan teori evolusi?",
+      "answer": "Charles Darwin",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama presiden pertama Indonesia?",
+      "answer": "Soekarno",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Siapa penemu lampu pijar?",
+      "answer": "Thomas Edison",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama negara dengan bendera berbentuk bulan sabit?",
+      "answer": "Turki",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa ibu kota Spanyol?",
+      "answer": "Madrid",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa yang dimaksud dengan desalinasi?",
+      "answer": "Proses pengolahan air laut menjadi air tawar.",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Siapa penemu pesawat terbang?",
+      "answer": "Wright bersaudara",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama negara yang dikenal dengan kincir angin?",
+      "answer": "Belanda",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama presiden AS yang ke-16?",
+      "answer": "Abraham Lincoln",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa yang dimaksud dengan fotosintesis?",
+      "answer": "Proses pembentukan makanan pada tumbuhan dengan bantuan cahaya.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menulis 'Romeo dan Juliet'?",
+      "answer": "William Shakespeare",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa ibu kota Italia?",
+      "answer": "Roma",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa itu epidemi?",
+      "answer": "Penyakit yang menyebar dalam waktu singkat di suatu daerah.",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa penemu vaksin polio?",
+      "answer": "Jonas Salk",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama pulau terbesar di Indonesia?",
+      "answer": "Kalimantan",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama benua tempat negara Brasil berada?",
+      "answer": "Amerika Selatan",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa jenis gas yang terkandung dalam udara yang paling banyak?",
+      "answer": "Nitrogen",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menciptakan teori Big Bang?",
+      "answer": "Georges Lemaître",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa ibu kota Inggris?",
+      "answer": "London",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama sumber energi yang berasal dari matahari?",
+      "answer": "Energi surya",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Berapa hasil dari 100 - 25?",
+      "answer": "75",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama orang yang pertama kali melakukan operasi jantung terbuka?",
+      "answer": "Christiaan Barnard",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Siapa yang menciptakan bahasa pemrograman Java?",
+      "answer": "James Gosling",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa nama negara yang terkenal dengan kanguru?",
+      "answer": "Australia",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Apa nama proyek yang membawa manusia pertama kali ke bulan?",
+      "answer": "Apollo 11",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama sungai yang mengalir melalui Mesir?",
+      "answer": "Sungai Nil",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa penemu mikroskop?",
+      "answer": "Antonie van Leeuwenhoek",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Apa warna bendera Indonesia?",
+      "answer": "Merah Putih",
+      "difficulty": "easy",
+      "point": 5
+    },
+    {
+      "question": "Berapa panjang dari garis khatulistiwa?",
+      "answer": "40.075 km",
+      "difficulty": "hard",
+      "point": 10
+    },
+    {
+      "question": "Apa nama kapal yang terkenal dalam peristiwa tenggelam pada tahun 1912?",
+      "answer": "Titanic",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menulis buku 'To Kill a Mockingbird'?",
+      "answer": "Harper Lee",
+      "difficulty": "medium",
+      "point": 7
+    },
+    {
+      "question": "Siapa yang menemukan radio?",
+      "answer": "Guglielmo Marconi",
+      "difficulty": "hard",
+      "point": 10
+    }    
+]

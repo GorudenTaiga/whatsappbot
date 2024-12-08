@@ -78,25 +78,48 @@ function saveLeaderboard(data) {
     fs.writeFileSync(`./jsonData/leaderboard.json`, JSON.stringify(data, null, 2), 'utf-8');
 }
 
+function readLeaderboardData() {
+    if (fs.existsSync('./jsonData/leaderboard.json')) {
+        try {
+            const data = JSON.parse(fs.readFileSync('./jsonData/leaderboard.json', 'utf8'));
+            // Validasi apakah data berupa array
+            if (Array.isArray(data)) {
+                return data;
+            } else {
+                console.log('Invalid JSON structure. Resetting to empty array.');
+                return [];
+            }
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            return [];
+        }
+    }
+    console.log('File not found. Returning empty array.');
+    return [];
+}
+
+function updateLeaderboard(groupId, userId, point) {
+    let leaderboard = readLeaderboardData();
+
+    let groupData = leaderboard.find((item) => item.groupId === groupId)
+    if (!groupData) {
+        groupData = {groupId, data: {}};
+        leaderboard.push(groupData);
+    }
+    groupData.data[userId] = (groupData.data[userId] || 0) + point
+    
+    saveLeaderboard(leaderboard)
+}
+
 client.on('message', async message => {
     try {
         const prefix = "bot!";
         const msg = message;
         const chat = await msg.getChat();
-        fs.existsSync(`./jsonData/leaderboard.json`)
-        fs.writeFileSync(`./jsonData/leaderboard.json`, JSON.stringify({}))
-        let leaderboard = JSON.parse(fs.readFileSync(`./jsonData/leaderboard.json`, 'utf-8'))
-        leaderboard["groupId"] = chat.id._serialized;
-        leaderboard = Object.keys(leaderboard).filter((item) => item.groupId == chat.id._serialized) || {}
-
+        const contact = await msg.getContact()
         if (msg.body.startsWith(prefix)) {
             
             const args = parseArguments(msg.body);
-            args.count = args.count || 1;
-            args.mode = args.mode || "safe";
-            args.title = args.title || "";
-            args.text = args.text || "";
-            args.time = 15000;
 
             const command = msg.body.slice(prefix.length).trim().split(/ +/).shift().toLowerCase();
             
@@ -305,11 +328,14 @@ client.on('message', async message => {
                 console.log(activeQuiz)
             } else if (command == "leaderboard") {
                 let board = 'Leaderboard : \n';
-                leaderboard.forEach(item => {
-                    console.log(item)
-                    // board += `${item.split('@')[0]}: ${leaderboard[item]} point\n`;
-                });
-
+                let leaderboard = readLeaderboardData();
+                leaderboard = leaderboard.filter((item) => item.groupId == chat.id._serialized).forEach((item) => {
+                    Object.keys(item.data).forEach(userId => {
+                        const point = item.data[userId];
+                        board += `${userId.split('@')[0]} : ${point}\n`
+                    })
+                })
+                
                 msg.reply(board)
             }
         }
@@ -319,11 +345,7 @@ client.on('message', async message => {
             console.log("Answer : ", currentQuiz.answer.toLowerCase());
             console.log("Choose : ", msg.body.toLowerCase())
             if (msg.body.toLowerCase().includes(currentQuiz.answer.toLowerCase())) {
-                const userId = msg.author || msg.from;
-                leaderboard[userId] = (leaderboard[userId] || 0) + currentQuiz.point;
-                // Object.keys(leaderboard).find((item.groupId == chat.name && item.groupId.userId == userId))
-                saveLeaderboard(leaderboard)
-                
+                updateLeaderboard(chat.id._serialized, contact.pushname, currentQuiz.point)                
                 
                 msg.reply(`Jawaban Benar! 🎉\nKamu meraih point : ${currentQuiz.point}`);
                 delete activeQuiz[chat.id._serialized]
