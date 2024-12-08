@@ -1,6 +1,7 @@
 const {Client, LocalAuth, MessageMedia} = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const { setTimeout } = require('timers/promises');
+const puppeteer = require('puppeteer')
 const axios = require('axios');
 const fs = require('fs');
 const sharp = require('sharp');
@@ -8,7 +9,19 @@ const sharp = require('sharp');
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: { headless: true }
+    puppeteer: { 
+        headless: true,
+        executablePath: puppeteer.executablePath(),
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-zygote',
+            '--disable-gpu',
+            '--single-process' // Untuk beberapa server/container
+        ]
+    }
 });
 
 client.on('qr', qr => {
