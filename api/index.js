@@ -48,7 +48,7 @@ client.on('group_leave', async (notif) => {
         const msg = await notif.getChat();
         const userId = notif.id.participant;
         const contact = userId.split('@')[0];
-        let data = readJsonData('./jsonData/outro.json');
+        let data = readJsonData('../jsonData/outro.json');
         data = Object.values(data).find((item) => item.groupId === msg.name);
         console.log(data);
         console.log(String("Outro : " + data.outro))
@@ -68,7 +68,7 @@ client.on('group_join', async (notif) => {
         const msg = await notif.getChat()
         const userId= notif.id.participant
         const contact = userId.split('@')[0]
-        let data = readJsonData('./jsonData/intro.json')
+        let data = readJsonData('../jsonData/intro.json')
         data = Object.values(data).find((item) => item.groupId === msg.name)
         console.log(data)
         if (data) {
@@ -94,13 +94,13 @@ const commandsHelp = {
 }
 
 function saveLeaderboard(data) {
-    fs.writeFileSync(`./jsonData/leaderboard.json`, JSON.stringify(data, null, 2), 'utf-8');
+    fs.writeFileSync(`../jsonData/leaderboard.json`, JSON.stringify(data, null, 2), 'utf-8');
 }
 
 function readLeaderboardData() {
-    if (fs.existsSync('./jsonData/leaderboard.json')) {
+    if (fs.existsSync('../jsonData/leaderboard.json')) {
         try {
-            const data = JSON.parse(fs.readFileSync('./jsonData/leaderboard.json', 'utf8'));
+            const data = JSON.parse(fs.readFileSync('../jsonData/leaderboard.json', 'utf8'));
             // Validasi apakah data berupa array
             if (Array.isArray(data)) {
                 return data;
@@ -153,8 +153,8 @@ client.on('message', async message => {
                     console.log('Image diterima')
                     const media = await msg.downloadMedia();
                     if (media) {
-                        const inputPath = './imageTemp/input/input.webp';
-                        const outputPath = './imageTemp/output/output.webp';
+                        const inputPath = '../imageTemp/input/input.webp';
+                        const outputPath = '../imageTemp/output/output.webp';
                         
                         fs.writeFileSync(inputPath, Buffer.from(media.data, 'base64'));
                         
@@ -208,13 +208,13 @@ client.on('message', async message => {
                 await chat.sendStateTyping();
                 if (msg.from.includes('@g.us')) {
                     try {
-                        let data = readJsonData('./jsonData/intro.json')
+                        let data = readJsonData('../jsonData/intro.json')
                         data = data.find((item) => item.groupId === chat.name)
                         if (data) {
                             console.log(`JSON Data Intro :\n${data}`)
                             data.intro = args.intro;
                             try {
-                                fs.writeFileSync('./jsonData/intro.json', JSON.stringify(data, null, 2), 'utf-8');
+                                fs.writeFileSync('../jsonData/intro.json', JSON.stringify(data, null, 2), 'utf-8');
                                 msg.reply("Berhasil mengupdate intro")
                             } catch (e) {
                                 console.log("Error : ", e)
@@ -229,7 +229,7 @@ client.on('message', async message => {
                             }
                             data.push(inputData);
                             try {
-                                fs.writeFileSync('./jsonData/intro.json', JSON.stringify(data, null, 2), 'utf-8')
+                                fs.writeFileSync('../jsonData/intro.json', JSON.stringify(data, null, 2), 'utf-8')
                                 msg.reply("Intro sudah berhasil ditambah")
                             } catch (e) {
                                 console.log("Error : ", e)
@@ -248,13 +248,13 @@ client.on('message', async message => {
                 if (msg.from.includes('@g.us')) {
                     if (args.update) {
                         try {
-                            let data = readJsonData('./jsonData/outro.json')
+                            let data = readJsonData('../jsonData/outro.json')
                             data = data.find((item) => item.groupID === chat.name)
                             if (data) {
                                 console.log(`JSON Data outro :\n${data}`)
                                 data.outro = args.outro;
                                 try {
-                                    fs.writeFileSync('./jsonData/outro.json', JSON.stringify(data, null, 2), 'utf-8');
+                                    fs.writeFileSync('../jsonData/outro.json', JSON.stringify(data, null, 2), 'utf-8');
                                     msg.reply("Berhasil mengupdate outro")
                                 } catch (e) {
                                     console.log("Error : ", e)
@@ -269,7 +269,7 @@ client.on('message', async message => {
                         }
                     } else {
                         try {
-                            let data = readJsonData('./jsonData/outro.json')
+                            let data = readJsonData('../jsonData/outro.json')
                             const inputData = {
                                 groupId: chat.name,
                                 createdBy: msg.author,
@@ -278,7 +278,7 @@ client.on('message', async message => {
                             if (data) {
                                 data.push(inputData);
                                 try {
-                                    fs.writeFileSync('./jsonData/outro.json', JSON.stringify(data, null, 2), 'utf-8')
+                                    fs.writeFileSync('../jsonData/outro.json', JSON.stringify(data, null, 2), 'utf-8')
                                     msg.reply("outro sudah berhasil ditambah")
                                 } catch (e) {
                                     console.log("Error : ", e)
@@ -301,7 +301,7 @@ client.on('message', async message => {
                         if (image && image.length > 0) {
                             const randomImage = image[Math.floor(Math.random() * image.length)];
         
-                            const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
+                            const imagePath = `../imageTemp/input/${randomImage.id}.jpg`;
                             const originalUrl = await getImageLink(randomImage.id);
                             console.log("Url : ", originalUrl)
 
@@ -335,7 +335,7 @@ client.on('message', async message => {
                 }
             } else if (command == "startquiz") {
                 await chat.sendStateTyping();
-                let quest = JSON.parse(fs.readFileSync('./jsonData/questions.json', 'utf-8'));
+                let quest = JSON.parse(fs.readFileSync('../jsonData/questions.json', 'utf-8'));
                 quest = Object.values(quest).filter((item) => item.difficulty == (args.diff || 'medium'));
 
                 const randomIndex = Math.floor(Math.random() * quest.length);
