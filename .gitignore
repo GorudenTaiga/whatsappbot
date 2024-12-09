@@ -1,4 +1,10 @@
 node_modules/
 .env
-
+imageTemp/
+jsonData/leaderboard.json
+jsonData/userData.json
+jsonData/intro.json
+jsonData/outro.json
+tmp/
+.wwebjs_cache/
 .vercel
