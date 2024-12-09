@@ -177,8 +177,8 @@ client.on('message', async message => {
                     console.log('Image diterima')
                     const media = await msg.downloadMedia();
                     if (media) {
-                        const inputPath = './imageTemp/input/input.webp';
-                        const outputPath = './imageTemp/output/output.webp';
+                        const inputPath = '../imageTemp/input/input.webp';
+                        const outputPath = '../imageTemp/output/output.webp';
                         
                         fs.writeFileSync(inputPath, Buffer.from(media.data, 'base64'));
                         
