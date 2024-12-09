@@ -44,19 +44,10 @@ async function puppeteerTest() {
     }
 }
 
-let qrCodeData
-app.get('/qr', async (req, res) => {
-    if (qrCodeData) {
-        const qrCodeImage = await qrcode.toDataURL(qrCodeData);
-        res.setHeader('Content-Type', 'text/html');
-        res.send(`<img src="${qrCodeImage}" alt="QR Code" />`);
-    } else {
-        res.send('QR Code is not yet generated. Please wait.');
-    }
-});
+
 
 client.on('qr', qr => {
-    qrcodeData = qr
+    qrcode.generate(qr)
     console.log("QR Dibuat")
 });
 
