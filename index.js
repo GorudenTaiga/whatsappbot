@@ -18,7 +18,7 @@ const client = new Client({
         dataPath: path
     }),
     puppeteer: {
-        executablePath: "/usr/bin/chromium-browser",
+	executablePath: "/snap/bin/chromium",
         headless: true,
         args: [
             "--no-sandbox",
@@ -177,8 +177,8 @@ client.on('message', async message => {
                     console.log('Image diterima')
                     const media = await msg.downloadMedia();
                     if (media) {
-                        const inputPath = '../imageTemp/input/input.webp';
-                        const outputPath = '../imageTemp/output/output.webp';
+                        const inputPath = './imageTemp/input/input.webp';
+                        const outputPath = './imageTemp/output/output.webp';
                         
                         fs.writeFileSync(inputPath, Buffer.from(media.data, 'base64'));
                         
@@ -325,7 +325,7 @@ client.on('message', async message => {
                         if (image && image.length > 0) {
                             const randomImage = image[Math.floor(Math.random() * image.length)];
         
-                            const imagePath = `../imageTemp/input/${randomImage.id}.jpg`;
+                            const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
                             const originalUrl = await getImageLink(randomImage.id);
                             console.log("Url : ", originalUrl)
 
