@@ -1,2 +1,5 @@
-2024/12/09-08:59:25.893 4a74 Creating DB E:\NUC_Reza\Project random\whatsappbot\tmp\.wwebjs_auth\session\Default\Session Storage since it was missing.
-2024/12/09-08:59:25.986 4a74 Reusing MANIFEST E:\NUC_Reza\Project random\whatsappbot\tmp\.wwebjs_auth\session\Default\Session Storage/MANIFEST-000001
+2024/12/09-07:29:59.462 53ee Recovering log #7
+2024/12/09-07:29:59.463 53ee Level-0 table #9: started
+2024/12/09-07:29:59.468 53ee Level-0 table #9: 383 bytes OK
+2024/12/09-07:29:59.478 53ee Delete type=0 #7
+2024/12/09-07:29:59.479 53ee Delete type=3 #5

@@ -1,3 +1,9 @@
-2024/12/09-09:00:40.913 70cc Reusing MANIFEST E:\NUC_Reza\Project random\whatsappbot\tmp\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2024/12/09-09:00:40.913 70cc Recovering log #3
-2024/12/09-09:00:40.914 70cc Reusing old log E:\NUC_Reza\Project random\whatsappbot\tmp\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2024/12/09-07:33:49.402 54df Recovering log #10
+2024/12/09-07:33:49.438 54df Level-0 table #12: started
+2024/12/09-07:33:49.449 54df Level-0 table #12: 1649 bytes OK
+2024/12/09-07:33:49.456 54df Delete type=0 #10
+2024/12/09-07:33:49.456 54df Delete type=3 #8
+2024/12/09-07:33:49.456 54df Compacting 4@0 + 0@1 files
+2024/12/09-07:33:49.475 54df Generated table #14@0: 70 keys, 6800 bytes
+2024/12/09-07:33:49.475 54df Compacted 4@0 + 0@1 files => 6800 bytes
+2024/12/09-07:33:49.477 54df compacted to: files[ 0 1 0 0 0 0 0 ]
