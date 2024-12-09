@@ -18,6 +18,7 @@ const client = new Client({
         dataPath: path
     }),
     puppeteer: {
+        executablePath: "/usr/bin/chromium-browser",
         headless: true,
         args: [
             "--no-sandbox",
