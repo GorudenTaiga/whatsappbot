@@ -43,7 +43,7 @@ app.listen(3000, () => {
 });
 
 
-let qrcodeData
+let qrCodeData
 app.get('/qr', async (req, res) => {
     if (qrCodeData) {
         const qrCodeImage = await qrcode.toDataURL(qrCodeData);
