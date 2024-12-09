@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer')
 const express = require('express')
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
 const sharp = require('sharp');
 
 const client = new Client({
