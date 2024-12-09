@@ -1,2 +1,5 @@
-2024/12/09-08:59:22.247 5e70 Creating DB E:\NUC_Reza\Project random\whatsappbot\tmp\.wwebjs_auth\session\Default\Local Storage\leveldb since it was missing.
-2024/12/09-08:59:22.556 5e70 Reusing MANIFEST E:\NUC_Reza\Project random\whatsappbot\tmp\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2024/12/09-07:29:58.432 53ed Recovering log #7
+2024/12/09-07:29:58.445 53ed Level-0 table #9: started
+2024/12/09-07:29:58.451 53ed Level-0 table #9: 2598 bytes OK
+2024/12/09-07:29:58.466 53ed Delete type=0 #7
+2024/12/09-07:29:58.466 53ed Delete type=3 #5
