@@ -9,26 +9,23 @@ const path = require('path');
 const sharp = require('sharp');
 
 const client = new Client({
-    restartOnAuthFail: true,
-    webVersionCache: {
-        type: "remote",
-        remotePath:
-          "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html",
-      },
-      puppeteer: {
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        executablePath:
+            "/usr/bin/chromium-browser",
         headless: true,
         args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-accelerated-2d-canvas",
-          "--no-first-run",
-          "--no-zygote",
-          "--single-process", 
-          "--disable-gpu",
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-accelerated-2d-canvas",
+            "--disable-gpu",
+            "--no-first-run",
+            "--no-zygote",
+            "--single-process",
+            "--disable-web-security",
         ],
-      },
-      authStrategy: new LocalAuth(),
+    },
 });
 
 // Puppeteer test function
