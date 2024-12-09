@@ -16,7 +16,6 @@ const client = new Client({
           "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html",
       },
       puppeteer: {
-        executablePath: puppeteer.executablePath(),
         headless: true,
         args: [
           "--no-sandbox",
@@ -29,23 +28,24 @@ const client = new Client({
           "--disable-gpu",
         ],
       },
-      authStrategy: new LocalAuth({
-        clientId: 'bot', // Nama folder untuk menyimpan file session
-        dataPath: path.join('/tmp', '.wwebjs_auth') // Direktori writable
-    }),
+      authStrategy: new LocalAuth(),
 });
 
-
-
-// Server untuk menjaga koneksi tetap hidup
-const app = express();
-app.get('/', (req, res) => {
-    res.send('WhatsApp Bot is running!');
-});
-app.listen(3000, () => {
-    console.log('Server is live at port 3000');
-});
-
+// Puppeteer test function
+async function puppeteerTest() {
+    try {
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
+        const page = await browser.newPage();
+        await page.goto("https://example.com");
+        console.log("Page Title:", await page.title());
+        await browser.close();
+    } catch (error) {
+        console.error("Error in Puppeteer:", error);
+    }
+}
 
 let qrCodeData
 app.get('/qr', async (req, res) => {
@@ -70,6 +70,7 @@ client.on('disconnected', (reason) => {
 
 client.on('ready', () => {
     console.log('Bot is ready');
+    puppeteerTest();
 });
 
 client.on('group_leave', async (notif) => {
