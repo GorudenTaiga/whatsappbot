@@ -8,8 +8,16 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
+const path = './tmp/.wwebjs_auth';
+
+if (!fs.existsSync(path)) {
+    fs.mkdirSync(path, { recursive: true }); // Buat direktori jika tidak ada
+}
+
 const client = new Client({
-    authStrategy: new LocalAuth(),
+    authStrategy: new LocalAuth({
+        dataPath: path
+    }),
     puppeteer: {
         executablePath:
             "/usr/bin/chromium-browser",
