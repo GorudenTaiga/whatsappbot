@@ -18,8 +18,6 @@ const client = new Client({
         dataPath: path
     }),
     puppeteer: {
-        executablePath:
-            "/usr/bin/chromium-browser",
         headless: true,
         args: [
             "--no-sandbox",
@@ -54,7 +52,7 @@ async function puppeteerTest() {
 
 
 client.on('qr', qr => {
-    qrcode.generate(qr)
+    qrcode.generate(qr, {small: true})
     console.log("QR Dibuat")
 });
 
