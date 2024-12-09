@@ -3,10 +3,7 @@
     "builds": [
       {
         "src": "index.js",
-        "use": "@vercel/node",
-        "env": {
-          "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "false"
-        }
+        "use": "@vercel/node"
       }
     ]
   }
