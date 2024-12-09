@@ -7,7 +7,6 @@ const axios = require('axios');
 const fs = require('fs');
 const sharp = require('sharp');
 
-
 const client = new Client({
     restartOnAuthFail: true,
     webVersionCache: {
@@ -28,7 +27,10 @@ const client = new Client({
           "--disable-gpu",
         ],
       },
-      authStrategy: new LocalAuth(),
+      authStrategy: new LocalAuth({
+        clientId: 'bot', // Nama folder untuk menyimpan file session
+        dataPath: path.join('/tmp', '.wwebjs_auth') // Direktori writable
+    }),
 });
 
 
