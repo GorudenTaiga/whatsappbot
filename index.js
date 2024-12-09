@@ -43,10 +43,20 @@ app.listen(3000, () => {
 });
 
 
-
+let qrcodeData
+app.get('/qr', async (req, res) => {
+    if (qrCodeData) {
+        const qrCodeImage = await qrcode.toDataURL(qrCodeData);
+        res.setHeader('Content-Type', 'text/html');
+        res.send(`<img src="${qrCodeImage}" alt="QR Code" />`);
+    } else {
+        res.send('QR Code is not yet generated. Please wait.');
+    }
+});
 
 client.on('qr', qr => {
-    qrcode.generate(qr, {small: true});
+    qrcodeData = qr
+    console.log("QR Dibuat")
 });
 
 client.on('disconnected', (reason) => {
