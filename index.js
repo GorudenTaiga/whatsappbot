@@ -16,6 +16,7 @@ const client = new Client({
           "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html",
       },
       puppeteer: {
+        executablePath: puppeteer.executablePath(),
         headless: true,
         args: [
           "--no-sandbox",
