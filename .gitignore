@@ -5,6 +5,6 @@ jsonData/leaderboard.json
 jsonData/userData.json
 jsonData/intro.json
 jsonData/outro.json
-tmp/
+tmp/*
 .wwebjs_cache/
 .vercel
