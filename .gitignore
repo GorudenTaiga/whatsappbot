@@ -2,6 +2,7 @@ node_modules/
 .env
 *.ssh
 *.pem
+/tmp
 tmp/.wwebjs_auth/*
 .wwebjs_cache/*
 .vercel
