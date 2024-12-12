@@ -7,3 +7,10 @@
 2024/12/09-07:33:49.475 54df Generated table #14@0: 70 keys, 6800 bytes
 2024/12/09-07:33:49.475 54df Compacted 4@0 + 0@1 files => 6800 bytes
 2024/12/09-07:33:49.477 54df compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/12/09-11:34:09.185 54df Level-0 table #16: started
+2024/12/09-11:34:09.191 54df Level-0 table #16: 14720 bytes OK
+2024/12/09-11:34:09.195 54df Delete type=0 #13
+2024/12/09-11:34:09.195 54df Delete type=2 #12
+2024/12/09-11:34:09.196 54df Delete type=2 #6
+2024/12/09-11:34:09.196 54df Delete type=2 #3
+2024/12/09-11:34:09.196 54df Delete type=2 #9
