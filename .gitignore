@@ -10,3 +10,4 @@ tmp/*
 .wwebjs_cache/
 .vercel
 GorudenTaigaSSH.pem
+whatsapp-botSSH.pem

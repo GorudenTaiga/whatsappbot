@@ -319,34 +319,32 @@ client.on('message', async message => {
             } else if (command.toLowerCase() == "pixiv") {
                 console.log(`Parameter Title yang diterima : ${args.title}\nParameter Mode yang diterima : ${args.mode}`);
                 try {
-                    msg.reply("Gambar sedang di download")
-                    const image = await searchImage(args.title, 'safe', msg);
+                    const progress = await msg.reply("Gambar sedang di download")
                     for (let i = 1;i <= parseInt(args.count);i++) {
+                        const image = await searchImage(args.title, 'safe', msg);
+                        const randomImage = image[Math.floor(Math.random() * (60 - 0 + 1) + 0)];
+                        const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
                         if (image && image.length > 0) {
-                            const randomImage = image[Math.floor(Math.random() * image.length)];
-        
-                            const imagePath = `./imageTemp/input/${randomImage.id}.jpg`;
                             const originalUrl = await getImageLink(randomImage.id);
                             console.log("Url : ", originalUrl)
 
-                            await downloadImage(originalUrl, imagePath, randomImage.id, msg);
+                            await downloadImage(originalUrl, imagePath, randomImage.id, progress);
 
-                            try {
-                                console.log("tanpa await");
-                                msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : Safe\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
-                                    media: MessageMedia.fromFilePath(imagePath)
-                                })    
-                            } catch (e) {
-                                console.log("dengan await")
-                                await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : Safe\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
-                                    media: MessageMedia.fromFilePath(imagePath)
-                                })
-                            } finally {
-                                fs.unlinkSync(imagePath);
-                            }
                         } else {
                             console.log("Image: ", image);
                             msg.reply("gambar tidak ditemukan");
+                        }
+                        try {
+                            console.log("tanpa await");
+                            await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : Safe\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
+                                media: MessageMedia.fromFilePath(imagePath)
+                            })    
+                            fs.unlinkSync(imagePath); 
+                        } catch (e) {
+                            console.log("dengan await")
+                            await msg.reply(`Berikut adalah gambar untuk tag ${args.title}\nJudul : ${args.title}\nMode : Safe\nLink : https://pixiv.net/artworks/${randomImage.id}`, undefined, {
+                                media: MessageMedia.fromFilePath(imagePath)
+                            })
                         }
                     }
                 } catch (e) {
@@ -477,9 +475,19 @@ async function downloadImage(url, path, id, msg) {
                 'Cookie' : 'PHPSESSID=87338801_xFyT5tXuCjiVn8ZMc45ExWNQbvpuxLRU'
             }
         });
+        console.log(`Content Length : ${response.headers["content-length"]}`)
+        const totalSize = parseInt(response.headers["content-length"].toString())
+        let downloadedSize = 0;
         await new Promise((resolve, reject) => {
             const writer = fs.createWriteStream(path);
             response.data.pipe(writer);
+            response.data.on('data', (chunk) => {
+                downloadedSize += parseInt(chunk.length.toString());
+                console.log(`Total Size : ${totalSize}`)
+                console.log(`Downloaded Size : ${downloadedSize}`)
+                let progressPercent = Math.round((downloadedSize/totalSize) * 100);
+                msg.edit(`Gambar sedang didownload\n${progressPercent}% ${'='.repeat(progressPercent/10)}`)
+            })
             writer.on('finish', resolve);
             writer.on('error', reject);
         });
