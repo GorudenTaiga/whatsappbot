@@ -9,12 +9,12 @@ const sharp = require('sharp');
 
 const path = './tmp/.wwebjs_auth';
 
-if (!fs.existsSync(path)) {
-    fs.mkdirSync(path, { recursive: true }); // Buat direktori jika tidak ada
+if (!fs.existsSync(path)) {    fs.mkdirSync(path, { recursive: true }); // Buat direktori jika tidak ada
 }
 
 const client = new Client({
     authStrategy: new LocalAuth({
+	clientId: 'bot',
         dataPath: path
     }),
     puppeteer: {
@@ -177,8 +177,8 @@ client.on('message', async message => {
                     console.log('Image diterima')
                     const media = await msg.downloadMedia();
                     if (media) {
-                        const inputPath = '../imageTemp/input/input.webp';
-                        const outputPath = '../imageTemp/output/output.webp';
+                        const inputPath = './imageTemp/input/input.webp';
+                        const outputPath = './imageTemp/output/output.webp';
                         
                         fs.writeFileSync(inputPath, Buffer.from(media.data, 'base64'));
                         
@@ -497,4 +497,5 @@ async function downloadImage(url, path, id, msg) {
 
 
 client.initialize();
+
 

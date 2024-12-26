@@ -18,7 +18,8 @@
     "pixiv-api-client": "^0.27.0",
     "pixiv-app-api": "^1.2.1",
     "pm2": "^5.4.3",
-    "puppeteer": "^23.10.1",
+    "puppeteer": "^23.10.4",
+    "puppeteer-core": "^23.10.4",
     "qrcode-terminal": "^0.12.0",
     "sharp": "^0.33.5",
     "whatsapp-web.js": "^1.26.0"

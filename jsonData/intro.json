@@ -1,7 +1,5 @@
-[
-  {
-    "groupId": "Whatsapp Bot Tester",
-    "createdBy": "6281290405123@c.us",
-    "intro": "Hello <username> Silahkan perkenalan dulu ya \nNama : \nUmur : \nGender : "
-  }
-]
+{
+  "groupId": "Whatsapp Bot Tester",
+  "createdBy": "6281290405123@c.us",
+  "intro": "ini tes aja"
+}
