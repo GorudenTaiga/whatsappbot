@@ -11,3 +11,4 @@ tmp/*
 .vercel
 GorudenTaigaSSH.pem
 whatsapp-botSSH.pem
+apikey.json

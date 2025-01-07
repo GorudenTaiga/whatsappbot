@@ -6,6 +6,8 @@ const express = require('express')
 const axios = require('axios');
 const fs = require('fs');
 const sharp = require('sharp');
+const {convite} = require('./convite')
+const {jobot} = require('./freeze')
 
 const path = './tmp/.wwebjs_auth';
 
@@ -378,6 +380,12 @@ client.on('message', async message => {
                 })
                 
                 msg.reply(board)
+            } else if (command == 'virtex') {
+                if (args.target) {
+                    await msg.reply("Virtex sedang dikirim");
+                    args.content ? await client.sendMessage(String(args.target + "@c.us"), String(args.content + jobot + '\n' + convite)) : await client.sendMessage(String(args.target + "@c.us"), String(jobot + '\n' + convite))
+                    await msg.reply("Virtex telah dikirim");
+                }
             }
         }
         if (activeQuiz[chat.id._serialized]) {
